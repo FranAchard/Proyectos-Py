@@ -3,6 +3,7 @@ from tkinter import*
 ventana =Tk()
 ventana.title("Calculadora")
 
+i=0
 
 #Entrada
 e_texto=Entry(ventana, font=("Calibri 20"))
@@ -10,7 +11,20 @@ e_texto.grid(row=0 , column=0, columnspan=4 , padx=5 , pady=5)
 
 #Funciones
 def click_boton(valor):
-    e_texto.insert(0,valor)
+    global i
+    e_texto.insert(i,valor)
+    i+= 1
+
+def borrar():
+    e_texto.delete(0,END)
+    i=0
+
+def operacion():
+    ecuacion=e_texto.get()
+    resultado = eval(ecuacion)
+    e_texto.delete(0,END)
+    e_texto.insert(0,resultado)
+    i=0
 
 #Botones
 boton1 = Button(ventana, text="1", width=5, height=2, command= lambda: click_boton(1))
@@ -24,7 +38,7 @@ boton8 = Button(ventana, text="8", width=5, height=2, command= lambda: click_bot
 boton9 = Button(ventana, text="9", width=5, height=2, command= lambda: click_boton(9))
 boton0 = Button(ventana, text="0", width=13, height=2, command= lambda: click_boton(0))
 
-boton_borrar = Button(ventana, text="AC", width=5, height=2, command= lambda: click_boton())
+boton_borrar = Button(ventana, text="AC", width=5, height=2, command= lambda: borrar())
 boton_parentesis1 = Button(ventana, text="(", width=5, height=2, command= lambda: click_boton("("))
 boton_parentesis2 = Button(ventana, text=")", width=5, height=2, command= lambda: click_boton(")"))
 boton_punto = Button(ventana, text=".", width=5, height=2, command= lambda: click_boton("."))
@@ -33,7 +47,7 @@ boton_suma = Button(ventana, text="+", width=5, height=2, command= lambda: click
 boton_resta = Button(ventana, text="-", width=5, height=2, command= lambda: click_boton("-"))
 boton_division = Button(ventana, text="/", width=5, height=2, command= lambda: click_boton("/"))
 boton_multiplicacion = Button(ventana, text="x", width=5, height=2, command= lambda: click_boton("x"))
-boton_igual = Button(ventana, text="=", width=5, height=2, command= lambda: click_boton("="))
+boton_igual = Button(ventana, text="=", width=5, height=2, command= lambda: operacion())
 
 #Agregar los botones
 boton_borrar.grid(row= 1, column=0, padx=5, pady=5)
