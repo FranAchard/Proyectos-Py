@@ -1,1 +1,1 @@
-# Proyectos-Py
+# Aplicaciones creadas con Python
